@@ -22,7 +22,7 @@ export class AuthService {
     private angularFireAuth: AngularFireAuth,
     private router: Router
   ) {
-    firebase.initializeApp(environment.firebase);
+    firebase.initializeApp(environment['firebase']);
     this.angularFireAuth.authState.subscribe((user) => {
       if (user) {
         user.getIdToken().then((token) => {
