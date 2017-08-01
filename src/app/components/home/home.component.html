@@ -1,0 +1,14 @@
+{{token}}
+<div class="lbl"> 
+  {{message}}
+</div>
+
+<ul>
+  <li class="text" *ngFor="let item of records">
+    {{item.partida}} {{item.capitulo}} {{item.programa}}
+    <ul>
+      <li>{{currencyFormatter(item.montoPesos_2009)}}</li>
+      <li>{{currencyFormatter(item.montoPesos_2010)}} ({{item.tasaReal_2010_2009}})</li>
+    </ul>
+  </li>
+</ul>
