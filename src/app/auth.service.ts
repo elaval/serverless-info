@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import {  } from 'angularfire2';
-import * as firebase from 'firebase';
+import { AngularFireModule } from 'angularfire2';
+import * as firebase from 'firebase/app';
 
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -55,8 +55,11 @@ export class AuthService {
   }
 
   gitHubLogin() {
+    // const p2 = new this.angularFireAuth.auth.GithubAuthProvider();
     const provider = new firebase.auth.GithubAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
+    //firebase.auth().signInWithPopup(provider).then((result) => {
+    this.angularFireAuth.auth.signInWithPopup(provider)
+    .then((result) => {
       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
       const token = result.credential.accessToken;
       // The signed-in user info.
@@ -64,7 +67,7 @@ export class AuthService {
       this.userSubject.next(user);
       console.log(user);
       // ...
-    }).catch(function(error: any) {
+    }).catch((error: any) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
