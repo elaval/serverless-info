@@ -61,6 +61,8 @@ export class AuthService {
       const token = result.credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      this.userSubject.next(user);
+      console.log(user);
       // ...
     }).catch(function(error: any) {
       // Handle Errors here.
