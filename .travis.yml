@@ -12,7 +12,7 @@ before_script:
   - npm i
 
 script:
-  - ng build --env=prod --build-optimizer --base-href /serverless-info/
+  - ng build --env=prod --base-href /serverless-info/
 
 deploy:
   provider: s3
