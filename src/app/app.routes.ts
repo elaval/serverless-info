@@ -12,7 +12,7 @@ import {LoginComponent} from './views/appviews/login.component';
 
 import {BlankLayoutComponent} from './components/common/layouts/blankLayout.component';
 import {BasicLayoutComponent} from './components/common/layouts/basicLayout.component';
-import {TopNavigationLayoutComponent} from './components/common/layouts/topNavigationlayout.component';
+import { TopNavigationLayoutComponent } from "app/components/common/layouts/topNavigationlayout.component";
 
 import {HomeComponent} from './components/home/home.component';
 import { PresupuestoComponent } from 'app/views/tideviews/presupuesto/presupuesto.component';
