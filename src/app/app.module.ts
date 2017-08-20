@@ -21,7 +21,7 @@ import {DashboardsModule} from './views/dashboards/dashboards.module';
 import {AppviewsModule} from './views/appviews/appviews.module';
 
 // App modules/components
-import {LayoutsModule} from './components/common/layouts/layouts.module';
+import {LayoutsModule} from 'app/components/common/layouts/layouts.module';
 import { TideviewsModule } from 'app/views/tideviews/tideviews.module';
 
 
