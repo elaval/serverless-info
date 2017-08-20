@@ -11,6 +11,7 @@ declare var jQuery:any;
 export class Dashboard4Component implements OnDestroy, OnInit {
 
   public nav:any;
+  lineChartOptions;
 
   public constructor() {
     this.nav = document.querySelector('nav.navbar');

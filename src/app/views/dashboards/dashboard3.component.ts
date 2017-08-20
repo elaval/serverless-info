@@ -12,6 +12,7 @@ export class Dashboard3Component implements OnDestroy, OnInit {
 
   public nav:any;
   public wrapper:any;
+  lineChartOptions;
 
   public constructor() {
     this.nav = document.querySelector('nav.navbar');
