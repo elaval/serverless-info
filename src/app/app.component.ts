@@ -24,7 +24,7 @@ export class AppComponent {
     this.authService.user.subscribe((user) => {
       this.user = user;
       if (user) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/starterview']);
       } else {
         this.router.navigate(['/login']);
       }

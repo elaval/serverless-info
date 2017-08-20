@@ -2,6 +2,14 @@
   {{message}}
 </div>
 
+<div class="lbl"> 
+  {{lambdamsg}}
+</div>
+
+<div class="lbl"> 
+  Bearer {{token}}
+</div>
+
 <ul>
   <li class="text" *ngFor="let item of records">
     {{item.partida}} {{item.capitulo}} {{item.programa}}
@@ -11,3 +19,4 @@
     </ul>
   </li>
 </ul>
+

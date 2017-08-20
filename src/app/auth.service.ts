@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class AuthService {
 
-  userSubject: Subject<any> = new Subject();
+  userSubject: BehaviorSubject<any> = new BehaviorSubject(null);
   user: Observable<any> = this.userSubject.asObservable();
   tokenSubject: BehaviorSubject<any> = new BehaviorSubject(null);
   token: Observable<any> = this.tokenSubject.asObservable();
@@ -34,13 +34,14 @@ export class AuthService {
   }
 
   login(username, password) {
-    
-    this.angularFireAuth.auth.signInWithEmailAndPassword('ernesto.laval@gmail.com', 'password')
+    this.angularFireAuth.auth.signInWithEmailAndPassword(username, password)
     .then((user) => {
       this.userSubject.next(user);
       console.log(user);
+    })
+    .catch((err) => {
+      console.error(err);
     });
-    
   }
 
   logout() {
