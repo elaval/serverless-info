@@ -16,6 +16,15 @@ import { AlertService } from 'app/services/alert.service';
 import { HomeComponent } from 'app/components/home/home.component';
 import { ROUTES } from 'app/app.routes';
 
+// App views
+import {DashboardsModule} from './views/dashboards/dashboards.module';
+import {AppviewsModule} from './views/appviews/appviews.module';
+
+// App modules/components
+import {LayoutsModule} from 'app/components/common/layouts/layouts.module';
+import { TideviewsModule } from 'app/views/tideviews/tideviews.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +35,11 @@ import { ROUTES } from 'app/app.routes';
     BrowserModule,
     FormsModule,
     HttpModule,
+
+    DashboardsModule,
+    LayoutsModule,
+    AppviewsModule,
+    TideviewsModule,
 
     RouterModule.forRoot(
       ROUTES,
