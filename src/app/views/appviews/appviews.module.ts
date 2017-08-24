@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FirebaseUIModule } from 'firebaseui-angular';
 
 
 import {StarterViewComponent} from './starterview.component';
@@ -20,7 +21,8 @@ import {SparklineModule } from '../../components/charts/sparkline';
     FormsModule,
     RouterModule,
     PeityModule,
-    SparklineModule
+    SparklineModule,
+    FirebaseUIModule
   ],
   exports: [
     StarterViewComponent,

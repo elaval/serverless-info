@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 
 import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthMethods, AuthProvider, FirebaseUIAuthConfig, FirebaseUIModule, AuthProviderWithCustomConfig } from 'firebaseui-angular';
+
 import { AuthService } from 'app/auth.service';
 import { LoginComponent } from 'app/components/login/login.component';
 import { AlertService } from 'app/services/alert.service';
@@ -24,6 +26,17 @@ import {AppviewsModule} from './views/appviews/appviews.module';
 import {LayoutsModule} from 'app/components/common/layouts/layouts.module';
 import { TideviewsModule } from 'app/views/tideviews/tideviews.module';
 
+const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
+  providers: [
+    AuthProvider.Google,
+    AuthProvider.Twitter,
+    AuthProvider.Github,
+    AuthProvider.Password,
+    AuthProvider.Phone
+  ],
+  method: AuthMethods.Popup,
+  tos: '<your-tos-link>'
+};
 
 @NgModule({
   declarations: [
@@ -49,6 +62,7 @@ import { TideviewsModule } from 'app/views/tideviews/tideviews.module';
     AngularFireModule.initializeApp(environment['firebase'], 'my-app-name'), // imports firebase/app needed for everything
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
   providers: [
     AuthService,
