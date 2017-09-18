@@ -1,0 +1,8 @@
+.middle-box h1.logo-name  {
+  font-size: 170px;
+}
+
+
+::ng-deep .middle-box h1 {
+  font-size: 24px;
+}

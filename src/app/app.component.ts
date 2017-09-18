@@ -21,6 +21,7 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router
   ) {
+
     this.authService.user.subscribe((user) => {
       this.user = user;
       if (user) {
@@ -29,6 +30,7 @@ export class AppComponent {
         this.router.navigate(['/login']);
       }
     });
+
 
 
   }

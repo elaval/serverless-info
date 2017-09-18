@@ -1,0 +1,30 @@
+export interface RecordPresupuesto {
+  codInstit: String;
+  periodo: String;
+  partida: String;
+  capitulo: String;
+  programa: String;
+  montoPesos_2009: String;
+  montoPesos_2010: String;
+  montoPesos_2011: String;
+  montoPesos_2012: String;
+  montoPesos_2013: String;
+  montoPesos_2014: String;
+  montoPesos_2015: String;
+  montoPesos_2016: String;
+  montoPesos_2017: String;
+  crecimiento_2009_2017: String;
+  'crecimiento_2009_2017_%': String;
+  tasa_2017_2009: String;
+  tasa_2010_2009: String;
+  tasa_2011_2010: String;
+  tasa_2012_2011: String;
+  tasa_2013_2012: String;
+  tasa_2014_2013: String;
+  tasa_2015_2014: String;
+  tasa_2016_2015: String;
+  tasa_2017_2016: String;
+  tasa_pinera: String;
+  tasa_bachelet: String;
+  tasa_pinera_menos_bachelet: String;
+}

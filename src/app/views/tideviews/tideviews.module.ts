@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PresupuestoComponent } from 'app/views/tideviews/presupuesto/presupuesto.component';
@@ -7,7 +8,13 @@ import { IboxtoolsModule } from 'app/components/common/iboxtools/iboxtools.modul
 import { PeityModule } from 'app/components/charts/peity';
 import { SparklineModule } from 'app/components/charts/sparkline';
 import { JVectorMapModule } from 'app/components/map/jvectorMap';
-import {ChartsModule} from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
+import { ChartModule } from 'angular2-highcharts';
+import { PresupuestoChartComponent } from 'app/views/tideviews/presupuesto/presupuesto-chart/presupuesto-chart.component';
+import { EducacionComponent } from 'app/views/tideviews/educacion/educacion.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Ng2CompleterModule } from 'ng2-completer';
+
 
 @NgModule({
   imports: [
@@ -18,10 +25,16 @@ import {ChartsModule} from 'ng2-charts';
     IboxtoolsModule,
     PeityModule,
     SparklineModule,
-    JVectorMapModule
+    JVectorMapModule,
+    ChartModule,
+    HttpClientModule,
+    FormsModule,
+    Ng2CompleterModule
   ],
   declarations: [
-    PresupuestoComponent
+    PresupuestoComponent,
+    PresupuestoChartComponent,
+    EducacionComponent
   ],
   exports: [
     PresupuestoComponent

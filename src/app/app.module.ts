@@ -1,3 +1,4 @@
+import {HttpClientModule} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,10 +22,12 @@ import { ROUTES } from 'app/app.routes';
 // App views
 import {DashboardsModule} from './views/dashboards/dashboards.module';
 import {AppviewsModule} from './views/appviews/appviews.module';
+import { ChartModule } from 'angular2-highcharts';
 
 // App modules/components
 import {LayoutsModule} from 'app/components/common/layouts/layouts.module';
 import { TideviewsModule } from 'app/views/tideviews/tideviews.module';
+import * as highcharts from 'highcharts';
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
   providers: [
@@ -32,7 +35,8 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AuthProvider.Twitter,
     AuthProvider.Github,
     AuthProvider.Password,
-    AuthProvider.Phone
+    AuthProvider.Phone,
+    AuthProvider.Facebook
   ],
   method: AuthMethods.Popup,
   tos: '<your-tos-link>'
@@ -48,6 +52,7 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
 
     DashboardsModule,
     LayoutsModule,
@@ -62,7 +67,9 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AngularFireModule.initializeApp(environment['firebase'], 'my-app-name'), // imports firebase/app needed for everything
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    // ChartModule.forRoot(highcharts)
+
   ],
   providers: [
     AuthService,

@@ -16,10 +16,11 @@ import {TopNavigationLayoutComponent} from './components/common/layouts/topNavig
 
 import {HomeComponent} from './components/home/home.component';
 import { PresupuestoComponent } from 'app/views/tideviews/presupuesto/presupuesto.component';
+import { EducacionComponent } from 'app/views/tideviews/educacion/educacion.component';
 
 export const ROUTES:Routes = [
   // Main redirect
-  {path: '', redirectTo: 'starterview', pathMatch: 'full'},
+  {path: '', redirectTo: 'dataviews/educacion', pathMatch: 'full'},
 
   // App views
   {
@@ -48,6 +49,12 @@ export const ROUTES:Routes = [
     path: 'dataviews', component: BasicLayoutComponent,
     children: [
       {path: 'presupuesto', component: PresupuestoComponent}
+    ]
+  },
+  {
+    path: 'dataviews', component: BasicLayoutComponent,
+    children: [
+      {path: 'educacion', component: EducacionComponent}
     ]
   },
   {

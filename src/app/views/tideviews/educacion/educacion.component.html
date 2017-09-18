@@ -1,0 +1,54 @@
+<h1>Search school</h1>
+<ng2-completer [(ngModel)]="myrbd" (selected)="onSelected($event)" [datasource]="directorioService" [minSearchLength]="3" descriptionField="'NOM_RBD'"></ng2-completer>
+
+
+<div *ngIf="schoolData">
+  <h1>{{schoolData.NOM_RBD}} ({{schoolData.RBD}})</h1>
+  <h2>{{schoolData.NOM_COM_RBD}}</h2>
+  <h2>{{schoolData.NUMERO_ESTUDIANTES}} estudiantes cursando 8º Básico en 2012</h2>
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h2>Donde estaban el 2008</h2>
+      <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let school of relatedSchools2008" (click)="getDataForSchool(school.RBD, 0)">
+              <td><i class="fa" aria-hidden="true" [class.fa-hand-o-right]="school.TIENE_8"> </i>
+              <td>{{school.NUMERO_ESTUDIANTES}}</td>
+              <td>{{school.NOM_RBD}} ({{school.RBD}})</td>
+              <td>{{school.NOM_COM_RBD}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h2>Donde fueron el 2016</h2>
+      <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let school of relatedSchools2016" (click)="getDataForSchool(school.RBD, 0)">
+                <td><i class="fa" aria-hidden="true" [class.fa-hand-o-right]="school.TIENE_8"> </i>
+                <td>{{school.NUMERO_ESTUDIANTES}}</td>
+                <td>{{school.NOM_RBD}} ({{school.RBD}})</td>
+                <td>{{school.NOM_COM_RBD}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
