@@ -1,52 +1,65 @@
-<h1>Search school</h1>
-<ng2-completer [(ngModel)]="myrbd" (selected)="onSelected($event)" [datasource]="directorioService" [minSearchLength]="3" descriptionField="'NOM_RBD'"></ng2-completer>
+<h1>Flujo escolar de 2008 a 2016<br>
+  <small class="m-r">A partir de los estudiantes que estaban en 8º Básico el 2012, descubrimos donde estaban esos estudiantes 4 años antes (normalmente en 4 básico) y 4 años después (normalmente en IV medio).</small>
+</h1>
+<ng2-completer [(ngModel)]="myrbd" placeholder="Nombre, RBD o comuna de un nuevo establecimiento con estudiantes en 8º Básico el 2012" [inputClass]="['form-control']" (selected)="onSelected($event)" [datasource]="directorioService" [minSearchLength]="3" descriptionField="'NOM_RBD'"></ng2-completer>
 
 
 <div *ngIf="schoolData">
-  <h1>{{schoolData.NOM_RBD}} ({{schoolData.RBD}})</h1>
-  <h2>{{schoolData.NOM_COM_RBD}}</h2>
-  <h2>{{schoolData.NUMERO_ESTUDIANTES}} estudiantes cursando 8º Básico en 2012</h2>
 
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <h2>Donde estaban el 2008</h2>
-      <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let school of relatedSchools2008" (click)="getDataForSchool(school.RBD, 0)">
-              <td><i class="fa" aria-hidden="true" [class.fa-hand-o-right]="school.TIENE_8"> </i>
-              <td>{{school.NUMERO_ESTUDIANTES}}</td>
-              <td>{{school.NOM_RBD}} ({{school.RBD}})</td>
-              <td>{{school.NOM_COM_RBD}}</td>
-            </tr>
-          </tbody>
-        </table>
+
+<div class="row">
+    <div class="col-md-offset-3 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>{{schoolData.NOM_RBD}} ({{schoolData.RBD}}), {{schoolData.NOM_COM_RBD}}</h5> <span class="label label-primary">2012</span>
+          </div>
+          <div class="ibox-content">
+            <div>
+              <h4>Había {{schoolData.NUMERO_ESTUDIANTES}} estudiantes cursando 8º Básico el 2012</h4>
+            </div>
+          </div>
+        </div>
     </div>
+</div>
+<div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <h2>Donde fueron el 2016</h2>
-      <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let school of relatedSchools2016" (click)="getDataForSchool(school.RBD, 0)">
-                <td><i class="fa" aria-hidden="true" [class.fa-hand-o-right]="school.TIENE_8"> </i>
-                <td>{{school.NUMERO_ESTUDIANTES}}</td>
-                <td>{{school.NOM_RBD}} ({{school.RBD}})</td>
-                <td>{{school.NOM_COM_RBD}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Dónde estaban esos estudiantes el</h5> <span class="label label-primary">2008</span>
+        </div>
+        <div class="ibox-content">
+          <div *ngFor="let school of relatedSchools2008" [class.clickable]="school.TIENE_8"  (click)="getDataForSchool(school.RBD, 0)">
+            <h4><i *ngIf="school.TIENE_8" class="fa" aria-hidden="true" [class.fa-hand-o-right]="school.TIENE_8"> </i>
+              {{school.NOM_RBD}} ({{school.RBD}})
+              <br>
+              <small class="m-r"><a>{{school.NOM_COM_RBD}}</a> </small>
+            </h4>
+            <h5>{{school.NUMERO_ESTUDIANTES}} Estudiantes</h5>
+            <hr>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>Dónde fueron esos estudiantes el</h5> <span class="label label-primary">2016</span>
+          </div>
+          <div class="ibox-content">
+            <div *ngFor="let school of relatedSchools2016" [class.clickable]="school.TIENE_8" (click)="getDataForSchool(school.RBD, 0)">
+              <h4><i *ngIf="school.TIENE_8" class="fa" aria-hidden="true" [class.fa-hand-o-right]="school.TIENE_8"> </i>
+                {{school.NOM_RBD}} ({{school.RBD}})
+                <br>
+                <small class="m-r"><a>{{school.NOM_COM_RBD}}</a> </small>
+              </h4>
+              <h5>{{school.NUMERO_ESTUDIANTES}} Estudiantes</h5>
+              <hr>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
 </div>
 
 

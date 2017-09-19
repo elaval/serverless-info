@@ -20,9 +20,16 @@
           IN+
         </div>
       </li>
-      <li [ngClass]="{active: activeRoute('starter')}">
-        <a [routerLink]="['/starterview']"><i class="fa fa-th-large"></i> <span class="nav-label">Starter view</span></a>
-      </li>
+        <li [ngClass]="{active: activeRoute('starter')}">
+          <a [routerLink]="['/dataviews/educacion']"><i class="fa fa-graduation-cap fa-lg"></i> <span class="nav-label">Educación</span></a>
+        </li>
+        <li [ngClass]="{active: activeRoute('starter')}">
+            <a [routerLink]="['/dataviews/presupuesto']"><i class="fa fa-money fa-lg"></i> <span class="nav-label">Presupuesto</span></a>
+          </li>
+          <!--
+        <li [ngClass]="{active: activeRoute('starter')}">
+            <a [routerLink]="['/starterview']"><i class="fa fa-th-large"></i> <span class="nav-label">Starter view</span></a>
+          </li>
       <li [ngClass]="{active: activeRoute('dataviews')}">
         <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Data views</span> <span class="fa arrow"></span> </a>
         <ul class="nav nav-second-level collapse" [ngClass]="{in: activeRoute('dashboards')}">
@@ -43,6 +50,7 @@
       <li [ngClass]="{active: activeRoute('login')}">
         <a [routerLink]="['/login']"><i class="fa fa-th-large"></i> <span class="nav-label">Login example</span></a>
       </li>
+    -->
     </ul>
 
   </div>

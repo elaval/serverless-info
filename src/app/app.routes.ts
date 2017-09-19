@@ -39,10 +39,18 @@ export const ROUTES:Routes = [
       {path: 'dashboard41', component: Dashboard41Component}
     ]
   },
+  /*
   {
     path: '', component: BasicLayoutComponent,
     children: [
       {path: 'starterview', component: StarterViewComponent}
+    ]
+  },
+  */
+  {
+    path: '', component: BasicLayoutComponent,
+    children: [
+      {path: 'dataviews/educacion', component: EducacionComponent}
     ]
   },
   {
@@ -68,6 +76,6 @@ export const ROUTES:Routes = [
 
 
   // Handle all other routes
-  {path: '**',  redirectTo: 'starterview'}
+  {path: '**',  redirectTo: 'dataviews/educacion'}
 ];
 
