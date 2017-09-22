@@ -20,7 +20,7 @@ import { EducacionComponent } from 'app/views/tideviews/educacion/educacion.comp
 
 export const ROUTES:Routes = [
   // Main redirect
-  {path: '', redirectTo: 'dataviews/educacion', pathMatch: 'full'},
+  {path: '', redirectTo: 'dataviews/presupuesto', pathMatch: 'full'},
 
   // App views
   {
@@ -76,6 +76,6 @@ export const ROUTES:Routes = [
 
 
   // Handle all other routes
-  {path: '**',  redirectTo: 'dataviews/educacion'}
+  {path: '**',  redirectTo: 'dataviews/presupuesto'}
 ];
 

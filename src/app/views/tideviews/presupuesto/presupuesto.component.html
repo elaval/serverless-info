@@ -1,33 +1,59 @@
-<div class="lbl">
-  {{message}}
-</div>
-
-<div class="lbl">
-  {{lambdamsg}}
+<h1>Presupuesto en Chile - Crecimiento relativo por programa (2010 a 2017)</h1>
+<div class="well">
+    "Crecimiento relativo" hace referencia al crecimiento de l presupuesto de un programa en relación crecimiento general del presupuesto.
+    <br><br>
+    Para calcular el crecimiento relativo utilizamos como referencia la tasa de crecimiento del programa "Tesoro Público".  Si un programa creció un 10% (tasa 1.1) y el Tesoro Público también creció un 10% (tasa 1.1), entonces el crecimiento relativo del programa es un 0% (tasa 1.0)
+    <br><br>
+    Hemos promediado el crecimiento relativo de los presupuestos formulados en 4 años del gobierno del Presidente Piñera (años 2011,2012,2013,2014) y en 4 años de gobiernos de la Presidenta Bachelet (años 2010, 2015, 2016, 2017) para generar una tasa de crecimiento relativo asociada a cada del Presidente Piñera y a la Presidenta Bachelet. Estas tasas se reflejan en el siguiente gráfico.
 </div>
 
 <div class="wrapper wrapper-content">
 
   <div class="row">
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <app-presupuesto-chart [data]="records"></app-presupuesto-chart>
-        <!--<chart [options]="options3"></chart>
-        <canvas baseChart width="400" height="400"
-        [data]="chartData"
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="'bubble'"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>-->
-      </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <app-presupuesto-chart [data]="records"></app-presupuesto-chart>
+      <!--<chart [options]="options3"></chart>
+      <canvas baseChart width="400" height="400"
+      [data]="chartData"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="'bubble'"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"></canvas>-->
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h3>Programas con crecimiento en gobierno de Piñera pero no en gobierno de Bachelet</h3>
+      <ul>
+        <li *ngFor="let item of partidasPrioridad_Pinera_SI_Bachelet_NO">
+            {{item.programa}}
+        </li>
+      </ul>
+
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h3>Programas con crecimiento en gobierno de Bachelet pero no en gobierno de Piñera</h3>
+
+      <li *ngFor="let item of partidasPrioridad_Pinera_NO_Bachelet_SI">
+          {{item.programa}}
+      </li>
+    </div>
+  </div>
 
 
+
+  <div class="row">
+
+
+
+
+
+    <!--
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
@@ -39,6 +65,9 @@
         </div>
       </div>
     </div>
+  -->
+
+
 
     <div class="col-lg-6" *ngFor="let item of records">
       <div class="ibox float-e-margins">
@@ -47,82 +76,94 @@
           <h5>{{item.capitulo}} {{item.programa}}</h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">{{currencyFormatter(item.montoPesos_2009)}} ({{item.tasaReal_2010_2009 | percent}})</h1>
-          <div class="stat-percent font-bold text-navy">{{currencyFormatter(item.montoPesos_2010)}}  <i class="fa fa-level-up"></i></div>
-          <small>New orders</small>
-          <div>Tasa 2010/2019 {{item.tasa2010_2009_relativa | percent}} / {{item.tasa_2010_2009 | percent}}</div>
-          <div>Tasa tesoro publico {{tesoroPublico.tasa_2010_2009 - 1 | percent}}</div>
-          tesoroPublico
-          <div>Tasa tesoro publico 2016 {{tesoroPublico.tasa_2015_2014 - 1 | percent}}</div>
-          <div>Tasa Piñera relativa {{item['tasa_piñera_relativa'] | percent}}</div>
-          <div>Tasa Bachelet relativa {{item.tasa_bachelet_relativa | percent}}</div>
-          tesoroPublico
+          <h1 class="no-margins"><small>Presupuesto 2017</small> {{currencyFormatter(item.montoPesos_2017)}} (<i class="fa" [class.fa-angle-up]="item.tasa_2017_2016>1" [class.fa-angle-down]="item.tasa_2017_2016<1" aria-hidden="true"></i>{{item.tasa_2017_2016 -1 | percent:'1.0-0'}})</h1>
+          <h2>Promedio crecimiento relativo segun el gobierno en que fueron formulado:</h2>
+          <div>Presidente Piñera: {{item['tasa_piñera_relativa'] | number:'1.2-2'}}</div>
+          <div>Presidenta Bachelet: {{item.tasa_bachelet_relativa | number:'1.2-2'}}</div>
           <table class="table table-striped table-hover">
             <thead>
               <tr>
+                <th>Gob</th>
                 <th>Año</th>
                 <th>Pesos</th>
                 <th>PesosAnterior</th>
-                <th>Tasa Crecimiento</th>
-                <th>Tasa Relativa</th>
+                <th>Crecimiento partida</th>
+                <th>Crecimiento tesoro</th>
+                <th>Crecimiento relativo</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td>B</td>
                 <td>2010</td>
                 <td>{{currencyFormatter(item.montoPesos_2010)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2009)}}</td>
-                <td>{{item.tasa_2010_2009 - 1 | percent}}</td>
-                <td>{{item.tasa2010_2009_relativa | percent}}</td>
+                <td>{{item.tasa_2010_2009 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2010_2009 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2010_2009_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>P</td>
                 <td>2011</td>
                 <td>{{currencyFormatter(item.montoPesos_2011)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2010)}}</td>
-                <td>{{item.tasa_2011_2010 - 1 | percent}}</td>
-                <td>{{item.tasa2011_2010_relativa | percent}}</td>
+                <td>{{item.tasa_2011_2010 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2011_2010 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2011_2010_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>P</td>
                 <td>2012</td>
                 <td>{{currencyFormatter(item.montoPesos_2012)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2011)}}</td>
-                <td>{{item.tasa_2012_2011 - 1 | percent}}</td>
-                <td>{{item.tasa2012_2011_relativa | percent}}</td>
+                <td>{{item.tasa_2012_2011 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2012_2011 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2012_2011_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>P</td>
                 <td>2013</td>
                 <td>{{currencyFormatter(item.montoPesos_2013)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2012)}}</td>
-                <td>{{item.tasa_2013_2012 - 1 | percent}}</td>
-                <td>{{item.tasa2013_2012_relativa | percent}}</td>
+                <td>{{item.tasa_2013_2012 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2013_2012 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2013_2012_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>P</td>
                 <td>2014</td>
                 <td>{{currencyFormatter(item.montoPesos_2014)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2013)}}</td>
-                <td>{{item.tasa_2014_2013 - 1 | percent}}</td>
-                <td>{{item.tasa2014_2013_relativa | percent}}</td>
+                <td>{{item.tasa_2014_2013 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2014_2013 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2014_2013_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>B</td>
                 <td>2015</td>
                 <td>{{currencyFormatter(item.montoPesos_2015)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2014)}}</td>
-                <td>{{item.tasa_2015_2014 - 1 | percent}}</td>
-                <td>{{item.tasa2015_2014_relativa | percent}}</td>
+                <td>{{item.tasa_2015_2014 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2015_2014 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2015_2014_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>B</td>
                 <td>2016</td>
                 <td>{{currencyFormatter(item.montoPesos_2016)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2015)}}</td>
-                <td>{{item.tasa_2016_2015 - 1 | percent}}</td>
-                <td>{{item.tasa2016_2015_relativa | percent}}</td>
+                <td>{{item.tasa_2016_2015 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2016_2015 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2016_2015_relativa | number:'1.2-2'}}</td>
               </tr>
               <tr>
+                <td>B</td>
                 <td>2017</td>
                 <td>{{currencyFormatter(item.montoPesos_2017)}}</td>
                 <td>{{currencyFormatter(item.montoPesos_2016)}}</td>
-                <td>{{item.tasa_2017_2016 - 1 | percent}}</td>
-                <td>{{item.tasa2017_2016_relativa | percent}}</td>
+                <td>{{item.tasa_2017_2016 | number:'1.2-2'}}</td>
+                <td>{{item.tasaTesoro_2017_2016 | number:'1.2-2'}}</td>
+                <td>{{item.tasa2017_2016_relativa | number:'1.2-2'}}</td>
               </tr>
             </tbody>
           </table>
@@ -131,180 +172,7 @@
       </div>
     </div>
 
-    <div class="col-lg-4">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <span class="label label-primary pull-right">Today</span>
-          <h5>visits</h5>
-        </div>
-        <div class="ibox-content">
-          <h1 class="no-margins">22 285,400</h1>
-          <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
-          <small>New orders</small>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <span class="label label-info pull-right">Monthly</span>
-          <h5>Orders</h5>
-        </div>
-        <div class="ibox-content">
-          <h1 class="no-margins">60 420,600</h1>
-          <div class="stat-percent font-bold text-info">40% <i class="fa fa-level-up"></i></div>
-          <small>New orders</small>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <span class="label label-warning pull-right">Annual</span>
-          <h5>Income</h5>
-        </div>
-        <div class="ibox-content">
-          <h1 class="no-margins">$ 120 430,800</h1>
-          <div class="stat-percent font-bold text-warning">16% <i class="fa fa-level-up"></i></div>
-          <small>New orders</small>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>New data for the report</h5>
-          <iboxtools></iboxtools>
-        </div>
-        <div class="ibox-content ibox-heading">
-          <h3>Stock price up
-            <div class="stat-percent text-navy">34% <i class="fa fa-level-up"></i></div>
-          </h3>
-          <small><i class="fa fa-stack-exchange"></i> New economic data from the previous quarter.</small>
-        </div>
-        <div class="ibox-content">
-          <div>
-
-            <div class="pull-right text-right">
-
-              <span peity [type]="peityType1" [options]="peityOptions1">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
-              <br/>
-              <small class="font-bold">$ 20 054.43</small>
-            </div>
-            <h4>NYS report new data!
-              <br/>
-              <small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>
-            </h4>
-          </div>
-        </div>
-      </div>
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Read below comments and tweets</h5>
-          <iboxtools></iboxtools>
-        </div>
-        <div class="ibox-content no-padding">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <p><a class="text-info" href="#">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-              <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-            </li>
-            <li class="list-group-item">
-              <p><a class="text-info" href="#">@Stock Man</a> Check this stock chart. This price is crazy! </p>
-              <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
-            </li>
-            <li class="list-group-item">
-              <p><a class="text-info" href="#">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
-              <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
-            </li>
-            <li class="list-group-item ">
-              <p><a class="text-info" href="#">@Jonathan Febrick</a> The standard chunk of Lorem Ipsum</p>
-              <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Timeline</h5>
-          <span class="label label-primary">Meeting today</span>
-          <iboxtools></iboxtools>
-        </div>
-
-        <div class="ibox-content inspinia-timeline">
-
-          <div class="timeline-item">
-            <div class="row">
-              <div class="col-xs-3 date">
-                <i class="fa fa-briefcase"></i>
-                6:00 am
-                <br/>
-                <small class="text-navy">2 hour ago</small>
-              </div>
-              <div class="col-xs-7 content no-top-border">
-                <p class="m-b-xs"><strong>Meeting</strong></p>
-
-                <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products.</p>
-
-              </div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="row">
-              <div class="col-xs-3 date">
-                <i class="fa fa-file-text"></i>
-                7:00 am
-                <br/>
-                <small class="text-navy">3 hour ago</small>
-              </div>
-              <div class="col-xs-7 content">
-                <p class="m-b-xs"><strong>Send documents to Mike</strong></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-              </div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="row">
-              <div class="col-xs-3 date">
-                <i class="fa fa-coffee"></i>
-                8:00 am
-                <br/>
-              </div>
-              <div class="col-xs-7 content">
-                <p class="m-b-xs"><strong>Coffee Break</strong></p>
-                <p>
-                  Go to shop and find some products.
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="row">
-              <div class="col-xs-3 date">
-                <i class="fa fa-phone"></i>
-                11:00 am
-                <br/>
-                <small class="text-navy">21 hour ago</small>
-              </div>
-              <div class="col-xs-7 content">
-                <p class="m-b-xs"><strong>Phone with Jeronimo</strong></p>
-                <p>
-                  Lorem Ipsum has been the industry's standard dummy text ever since.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
 </div>

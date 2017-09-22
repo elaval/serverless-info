@@ -11,6 +11,11 @@ import { RecordPresupuesto } from "app/interfaces/interfaces";
   styleUrls: ['./presupuesto.component.css']
 })
 export class PresupuestoComponent implements OnInit, OnDestroy {
+  [x: string]: any;
+  partidasPrioridad_Pinera_SI_Bachelet_NO: any;
+  partidasPrioridad_Piñera_NO_Bachelet_SI: any;
+  partidasPrioridad_Piñera_SI_Bachelet_NO: any;
+  partidasPrioridadSiPiñeraNoBachelet: any;
   options2: { chart: { type: string; plotBorderWidth: number; zoomType: string; }; legend: { enabled: boolean; }; title: { text: string; }; subtitle: { text: string; }; xAxis: { gridLineWidth: number; title: { text: string; }; labels: { format: string; }; plotLines: { color: string; dashStyle: string; width: number; value: number; label: { rotation: number; y: number; style: { fontStyle: string; }; text: string; }; zIndex: number; }[]; }; yAxis: { startOnTick: boolean; endOnTick: boolean; title: { text: string; }; labels: { format: string; }; maxPadding: number; plotLines: { color: string; dashStyle: string; width: number; value: number; label: { align: string; style: { fontStyle: string; }; text: string; x: number; }; zIndex: number; }[]; }; tooltip: { useHTML: boolean; headerFormat: string; pointFormat: string; footerFormat: string; followPointer: boolean; }; plotOptions: { series: { dataLabels: { enabled: boolean; format: string; }; }; }; series: { data: { x: number; y: number; z: number; name: string; country: string; }[]; }[]; };
   options: { title: { text: string; }; series: { data: number[]; }[]; };
   options3: any;
@@ -248,8 +253,25 @@ export class PresupuestoComponent implements OnInit, OnDestroy {
             d.tasa2017_2016_relativa = d.tasa_2017_2016 / this.tesoroPublico['tasa_2017_2016'];
             d.tasa_piñera_relativa = (d.tasa2011_2010_relativa + d.tasa2012_2011_relativa + d.tasa2013_2012_relativa + d.tasa2014_2013_relativa) / 4;
             d.tasa_bachelet_relativa = (d.tasa2010_2009_relativa + d.tasa2015_2014_relativa + d.tasa2016_2015_relativa + d.tasa2017_2016_relativa) / 4;
+
+            d.tasaTesoro_2010_2009 = this.tesoroPublico['tasa_2010_2009'];
+            d.tasaTesoro_2011_2010 = this.tesoroPublico['tasa_2011_2010'];
+            d.tasaTesoro_2012_2011 = this.tesoroPublico['tasa_2012_2011'];
+            d.tasaTesoro_2013_2012 = this.tesoroPublico['tasa_2013_2012'];
+            d.tasaTesoro_2014_2013 = this.tesoroPublico['tasa_2014_2013'];
+            d.tasaTesoro_2015_2014 = this.tesoroPublico['tasa_2015_2014'];
+            d.tasaTesoro_2016_2015 = this.tesoroPublico['tasa_2016_2015'];
+            d.tasaTesoro_2017_2016 = this.tesoroPublico['tasa_2017_2016'];
+
           });
-          this.records = _.sortBy(this.records, (d) => -d.tasa_bachelet_relativa);
+          this.records = _.sortBy(this.records, (d) => -d.montoPesos_2017);
+
+          this.partidasPrioridad_Pinera_SI_Bachelet_NO = _.sortBy(_.filter(this.records, (d) =>
+          d.tasa_piñera_relativa > 1 && d.tasa_bachelet_relativa < 1), d => -d.montoPesos_2017);
+
+          this.partidasPrioridad_Pinera_NO_Bachelet_SI = _.sortBy(_.filter(this.records, (d) =>
+          d.tasa_piñera_relativa < 1 && d.tasa_bachelet_relativa > 1), d => -d.montoPesos_2017);
+
           console.log(this.tesoroPublico);
 
           /*
@@ -259,17 +281,6 @@ export class PresupuestoComponent implements OnInit, OnDestroy {
           });
           */
         });
-
-        this.http.get('https://j3qmx8agh1.execute-api.us-east-1.amazonaws.com/development/hello', options)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.lambdamsg = data;
-        },
-        (err) => {
-          console.error(err);
-        }
-        );
-
 
       }
     });

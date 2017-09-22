@@ -95,6 +95,14 @@ export class PresupuestoChartComponent implements OnInit, OnChanges {
     this.yAxisElem = this.mainContainer.append('g')
       .attr('class', 'yAxis');
 
+    this.mainContainer.append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('class', 'yLabel');
+
+    this.mainContainer.append('text')
+      .attr('class', 'xLabel');
+
+
     this.updateContainerSize();
 
     this.color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -222,12 +230,28 @@ export class PresupuestoChartComponent implements OnInit, OnChanges {
       .attr('transform', 'translate(' + this.xScale(1) + ',0)')
       .call(this.yAxis);
 
+      this.mainContainer.selectAll('text.xLabel')
+      .attr('text-anchor', 'end')
+      .attr('x', this.width)
+      .attr('y', this.yScale(1))
+      .attr('dy', -5)
+      .text('Presidenta Bachelet')
+      ;
+
+      this.mainContainer.selectAll('text.yLabel')
+      .attr('text-anchor', 'end')
+      .attr('x', 0)
+      .attr('y', this.xScale(1))
+      .attr('dy', 15)
+      .text('Presidente Piñera')
+      ;
+
     }
 
   }
 
   zoomed() {
-    this.mainContainer.attr("transform", d3.event.transform);
+    this.mainContainer.attr('transform', d3.event.transform);
     //this.xAxisElem.call(this.xAxis.scale(d3.event.transform.rescaleX(this.xScale)));
     //this.yAxisElem.call(this.yAxis.scale(d3.event.transform.rescaleY(this.yScale)));
   }
