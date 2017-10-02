@@ -1,4 +1,16 @@
-# Angularfire
+# Serverless POC
+
+This webpage is a JS FrontEnd for a Proof of Concept of a serverless Data Access System.
+
+(Serverless doesn't *really* mean that there are no servers involved, but we don't have a dedicated metal or virtual box in the loop)
+
+There are several components involved in the system
+
+##Frontend source code on Github 
+An Angular (4.x) web site that connects to APIs that provide data.  The code is created - and built - using Angular CLI.
+
+##Frontend website deployed to Amazon S3
+The Angular 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
@@ -26,3 +38,5 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+

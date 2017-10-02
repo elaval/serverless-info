@@ -76,6 +76,6 @@ export const ROUTES:Routes = [
 
 
   // Handle all other routes
-  {path: '**',  redirectTo: 'dataviews/presupuesto'}
+  {path: '**',  redirectTo: 'dataviews/educacion'}
 ];
 
